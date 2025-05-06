@@ -123,7 +123,7 @@ tplink,re6000xd)
 	;;
 netcore,n60-pro-512rom|\
 netcore,n60-pro)
-	ubootenv_add_uci_config "/dev/ubootenv" "0x0" "0x80000" "0x80000" "1"
+	ubootenv_add_uci_config "/dev/u-boot-env" "0x0" "0x80000" "0x80000" "1"
 	;;
 openembed,som7981)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x80000" "0x80000"
