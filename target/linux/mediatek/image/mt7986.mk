@@ -530,6 +530,24 @@ define Device/netcore_n60-pro
 endef
 TARGET_DEVICES += netcore_n60-pro
 
+define Device/netcore_n60-pro-512rom
+  DEVICE_VENDOR := Netcore
+  DEVICE_MODEL := N60 PRO 512ROM versions
+  DEVICE_DTS := mt7986a-netcore-n60-pro-512rom
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := netcore,n60-pro-512rom
+  DEVICE_PACKAGES := $(MT7986_USB_PKGS) f2fsck losetup mkf2fs kmod-fs-f2fs kmod-mmc \
+        luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += netcore_n60-pro-512rom
+
 define Device/glinet_gl-mt6000
    DEVICE_VENDOR := GL.iNet
    DEVICE_MODEL := GL-MT6000
