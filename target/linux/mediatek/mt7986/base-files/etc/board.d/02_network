@@ -29,6 +29,7 @@ mediatek_setup_interfaces()
 	ruijie,rg-x60-pro*)
 		ucidef_set_interfaces_lan_wan "lan0 lan1 lan2 lan3" wan
 		;;
+	netcore,n60-pro-512rom |\
 	netcore,n60-pro)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" wan
 		;;
@@ -59,6 +60,8 @@ mediatek_setup_macs()
 	local part_name="Factory"
 	
 	case $board in
+	netcore,n60-pro-512rom |\
+	netcore,n60-pro |\
 	*netcore,n60*)
 		wifi_mac=$(mtd_get_mac_binary $part_name 0x1fef20)
 		lan_mac="$(macaddr_add $wifi_mac -1)"
