@@ -1,0 +1,18 @@
+#!/bin/sh
+
+NPROCS="$(grep -c "^processor.*:" /proc/cpuinfo)"
+[ "$NPROCS" -gt 1 ] || exit
+for dev in /sys/class/net/*; do
+	[ -d "$dev" ] || continue
+	dev_name=$(basename $dev)
+	dev_prefix="${dev_name%%[0-9]*}"
+	if [ "$dev_prefix" = "usb" ] || [ "$dev_prefix" = "wwan" ] || [ "$dev_prefix" = "rmnet" ] || [ "$dev_name" = "eth2" ]; then
+		if [ "$NPROCS" -gt 2 ]; then
+		# set usb/wwan rps to cpu2
+		echo 2 > /sys/class/net/$dev_name/queues/rx-0/rps_cpus
+		else
+		# set usb/wwan rps to cpu1
+		echo 1 > /sys/class/net/$dev_name/queues/rx-0/rps_cpus
+		fi
+	fi
+done
