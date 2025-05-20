@@ -1,6 +1,21 @@
 #include "mt7981.dtsi"
 
 / {
+
+
+        leds {
+                compatible = "gpio-leds";
+                wifi2g:led2{
+                        label = "airpi:2g";
+                        gpios = <&pio 34 GPIO_ACTIVE_LOW>;
+                };
+
+                wifi5g:led3{
+                        label = "airpi:5g";
+                        gpios = <&pio 35 GPIO_ACTIVE_LOW>;
+                };
+        };
+
 	chosen {
 		bootargs = "console=ttyS0,115200n1 loglevel=8  \
 				earlycon=uart8250,mmio32,0x11002000";

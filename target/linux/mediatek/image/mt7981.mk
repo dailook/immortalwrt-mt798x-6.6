@@ -809,7 +809,7 @@ define Device/Airpi-emmc-manper
   KERNEL_IN_UBI := 1
   IMAGES += factory.bin
   DEVICE_PACKAGES := $(MT7981_USB_PKGS) f2fsck losetup mkf2fs kmod-fs-f2fs kmod-mmc \
-         luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils
+         luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils Airpi-gpio-fan
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
