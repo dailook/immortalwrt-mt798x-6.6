@@ -200,6 +200,7 @@ set_interface()
 		"ipv4v6") set_ipv4v6_interface "wwan_5g_${modem_no}" "wwan6_5g_${modem_no}" "${network_interface}" ;;
 		*) set_ipv4v6_interface "wwan_5g_${modem_no}" "wwan6_5g_${modem_no}" "${network_interface}" ;;
 	esac
+	/etc/init.d/firewall restart
 }
 
 #设置移远模组MAC地址
@@ -447,6 +448,8 @@ stop_ecm()
 		at_command="AT^NDISDUP=${define_connect},0"
 	elif [ "$manufacturer" = "huawei" ]; then
 		at_command="AT^NDISDUP=${define_connect},0"
+	elif [ "$manufacturer" = "tdtech" ]; then
+		at_command="AT^NDISDUP=${define_connect},0"
 	else
 		at_command='ATI'
 	fi
@@ -672,7 +675,7 @@ dial()
 
 	#设置网络预设
 	connect_presets
-
+	sleep 3s
 	#根据不同的拨号模式拨号
 	if [ "$mode" = "qmi" ]; then
 		qmi

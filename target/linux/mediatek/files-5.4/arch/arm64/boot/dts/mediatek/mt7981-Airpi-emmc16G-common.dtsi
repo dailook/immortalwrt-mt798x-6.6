@@ -1,10 +1,9 @@
 #include "mt7981.dtsi"
 
 / {
-
-
         leds {
                 compatible = "gpio-leds";
+
                 wifi2g:led2{
                         label = "airpi:2g";
                         gpios = <&pio 34 GPIO_ACTIVE_LOW>;

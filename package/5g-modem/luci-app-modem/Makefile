@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=luci-app-modem
 LUCI_TITLE:=LuCI support for Modem
 LUCI_PKGARCH:=all
-PKG_VERSION:=1.4.4
+PKG_VERSION:=1.4.5
 PKG_LICENSE:=GPLv3
 PKG_LINCESE_FILES:=LICENSE
 PKF_MAINTAINER:=Siriling <siriling@qq.com>
@@ -25,7 +25,6 @@ LUCI_DEPENDS:=+luci-compat \
 		+pciutils \
 		+quectel-CM-5G \
 		+modemmanager \
-		+kmod-usb-net-qmi-wwan-fibocom \
 		+luci-proto-modemmanager \
 		+sms-tool \
 		+bc +jq

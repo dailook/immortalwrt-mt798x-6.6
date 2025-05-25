@@ -76,7 +76,7 @@ m_modem_presets()
 	#PDP设置
 	at_command="AT+CGDCONT=${define_connect},\"IPV4V6\",\"\""
 	at "${at_port}" "${at_command}"
-
+	sleep 3s
 	#制造商私有预设
 	case $manufacturer in
 		"quectel") quectel_presets ;;
@@ -84,6 +84,7 @@ m_modem_presets()
 		"meig") meig_presets ;;
 		"simcom") simcom_presets ;;
 		"huawei") huawei_presets ;;
+		"tdtech") tdtech_presets ;;
 	esac
 }
 

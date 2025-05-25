@@ -372,6 +372,7 @@ get_modem_info()
 		"meig") get_meig_info "${at_port}" "${platform}" "${define_connect}" ;;
 		"simcom") get_simcom_info "${at_port}" "${platform}" "${define_connect}" ;;
 		"huawei") get_huawei_info "${at_port}" "${platform}" "${define_connect}" ;;
+		"tdtech") get_tdtech_info "${at_port}" "${platform}" "${define_connect}" ;;
 		*) debug "未适配该模组" ;;
 	esac
 
