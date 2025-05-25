@@ -635,15 +635,15 @@ tdtech_sim_info()
 
     #ISP（互联网服务提供商）
     at_command="AT+COPS?"
-    isp=$(sh ${SCRIPT_DIR}/modem_at.sh ${at_port} ${at_command} | grep "+COPS" | awk -F'"' '{print $2}')
-    if [ "$isp" = "4E2D56FD8054901A" ]; then
+    isp=$(sh ${SCRIPT_DIR}/modem_at.sh ${at_port} ${at_command} | grep "+COPS" | awk -F'"' '{print $2}'| tr -d '\r\n' | xargs)
+    if [[ "$isp" == "4E2D56FD8054901A" ]]; then
     isp="CHN-UNICOM"
     fi
     if [ -z "$isp" ]; then
-    at_command="AT+EONS?"
-    isp=$(sh ${SCRIPT_DIR}/modem_at.sh ${at_port} "${at_command}" | grep "+EONS" | awk -F'"' '{print $2}')
-    if [ "$isp" = "4E2D56FD8054901A" ]; then
-        isp="CHN-UNICOM"
+    at_command="AT^EONS=1"
+    isp=$(sh ${SCRIPT_DIR}/modem_at.sh ${at_port} "${at_command}" | grep "^EONS" | awk -F'"' '{print $2}'| tr -d '\r\n' | xargs)
+    if [[ "$isp" == "4E2D56FD8054901A" ]]; then
+    isp="CHN-UNICOM"
     fi
     fi
     # if [ "$isp" = "CHN-CMCC" ] || [ "$isp" = "CMCC" ]|| [ "$isp" = "46000" ]; then

@@ -347,19 +347,17 @@ info_to_json()
 #获取模组信息
 get_modem_info()
 {
-	update_time=$(date +"%Y-%m-%d %H:%M:%S")
-
+	update_time=$(date +"%Y-%m-%d %H:%M:%S") 
 	debug "检查模组的AT串口"
 	#获取模块AT串口
 	if [ -z "$at_port" ]; then
 		debug "模组没有AT串口"
 		return
 	fi
-
 	#检查模块状态（是否处于重启，重置，串口异常状态）
     local at_command="ATI"
-	local response=$(at ${at_port} ${at_command})
-	if [[ "$response" = *"failed"* ]] || [[ "$response" = *"$at_port"* ]]; then
+	local response=$(timeout 10 at ${at_port} ${at_command})
+	if [[ $? -ne 0 ]] || [[ "$response" = *"failed"* ]] || [[ "$response" = *"$at_port"* ]]; then
 		debug "模组AT串口未就绪"
 		return
 	fi
@@ -387,7 +385,7 @@ get_modem_info()
 # $4:连接定义
 modem_info()
 {
-	#初值化模组信息
+    #初值化模组信息
     debug "初值化模组信息"
     init_modem_info
     debug "初值化模组信息完成"

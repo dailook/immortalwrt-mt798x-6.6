@@ -160,14 +160,37 @@ rndis_dial()
 
     #手动拨号（广和通FM350-GL）
     if [ "$manufacturer" = "fibocom" ] && [ "$platform" = "mediatek" ]; then
+        sleep 3s
+	local at_command="AT+COPS?"
+        isp=$(at ${at_port} ${at_command} | grep "+COPS" | awk -F'"' '{print $2}' | tr -d '\r\n' | xargs)
+        if [[ "$isp" == "4E2D56FD8054901A" ]]; then
+        isp="CHN-UNICOM"
+        fi
 
-        local at_command="AT+CGACT=1,${define_connect}"
+	if [[ "$isp" == "CHN-CMCC" || "$isp" == "CMCC" || "$isp" == "46000" || "$isp" == "CHINA MOBILE"]]; then
+    	at_command="AT+CGDCONT=${define_connect},\"IPV4V6\",\"cbnet\""
+    	at "$at_port" "$at_command"
+	echo "matching ISP: [$isp]" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	elif [[ "$isp" == "CHN-UNICOM" || "$isp" == "UNICOM" || "$isp" == "46001" ]]; then
+    	at_command="AT+CGDCONT=${define_connect},\"IPV4V6\",\"3gnet\""
+    	at "$at_port" "$at_command"
+	echo "matching ISP: [$isp]" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	elif [[ "$isp" == "CHN-CT" || "$isp" == "CT" || "$isp" == "46011"  || "$isp" == "CHINA TELECOM"]]; then
+    	at_command="AT+CGDCONT=${define_connect},\"IPV4V6\",\"ctnet\""
+    	at "$at_port" "$at_command"
+	echo "matching ISP: [$isp]" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	else
+    	echo "No matching ISP: [$isp]" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	at_command="AT+CGDCONT=${define_connect},\"IPV4V6\",\"cbnet\""
+        at "$at_port" "$at_command"
+        echo "matching ISP: [$isp]" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	fi
+	local at_command="AT+CGACT=1,${define_connect}"
         #打印日志
         dial_log "${at_command}" "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
         #激活并拨号
+	sleep 3s
         at "${at_port}" "${at_command}"
-
-        sleep 3s
     else
         #拨号
         ecm_dial "${at_port}" "${manufacturer}" "${define_connect}"
@@ -209,7 +232,7 @@ modem_network_task()
     local define_connect=$(uci -q get modem.modem${modem_no}.define_connect)
     local interface_name="wwan_5g_${modem_no}"
     local interface_name_ipv6="wwan6_5g_${modem_no}"
-
+    local interface_network=$(uci -q get modem.modem${modem_no}.network_interface)
     #AT串口未获取到重新获取（解决模组还在识别中，就已经开始拨号的问题）
     while [ -z "$manufacturer" ] || [ "$manufacturer" = "unknown" ]; do
         at_port=$(uci -q get modem.modem${modem_no}.at_port)
@@ -244,16 +267,16 @@ modem_network_task()
         fi
 
         #网络连接检查
-        local at_command="AT+CGPADDR=${define_connect}"
+	if ! ping -c 2 -w 5 -I "$interface_network" 223.5.5.5 > /dev/null 2>&1; then
+        echo "[$(date +"%Y-%m-%d %H:%M:%S")] ping failed" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
+	local at_command="AT+CGPADDR=${define_connect}"
         local ipv4=$(at ${at_port} ${at_command} | grep "+CGPADDR: " | sed -n '1p' | awk -F',' '{print $2}' | sed 's/"//g')
 
         if [ -z "$ipv4" ]; then
-
             [ "$mode" = "modemmanager" ] && {
                 #拨号工具为modemmanager时，不需要重新设置连接定义
                 continue
             }
-
             #输出日志
             echo "[$(date +"%Y-%m-%d %H:%M:%S")] Unable to get IPv4 address" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
             echo "[$(date +"%Y-%m-%d %H:%M:%S")] Redefine connect to ${define_connect}" >> "${MODEM_RUNDIR}/modem${modem_no}_dial.cache"
@@ -269,7 +292,6 @@ modem_network_task()
                 "modemmanager") modemmanager_dial "${interface_name}" "${define_connect}" ;;
                 *) ecm_dial "${at_port}" "${manufacturer}" "${define_connect}" ;;
             esac
-
         elif [[ "$ipv4" = *"0.0.0.0"* ]]; then
 
             #输出日志
@@ -313,6 +335,7 @@ modem_network_task()
             }
 	    /etc/init.d/firewall restart
         fi
+	fi
 	rdisc6 eth2 &
         ndisc6 fe80::1 eth2 &
         sleep 5s
