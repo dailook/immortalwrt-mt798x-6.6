@@ -221,6 +221,7 @@ platform_do_upgrade() {
 	huasifei,wh3000-emmc |\
 	cmcc,rax3000m-emmc |\
 	cmcc,xr30-emmc |\
+        qczt,qc3018ax |\
 	*sl,3000* |\
         *sl,3000-emmc* |\
 	*emmc*)
