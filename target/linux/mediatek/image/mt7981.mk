@@ -814,3 +814,15 @@ define Device/Airpi-emmc-manper
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += Airpi-emmc-manper
+
+define Device/qczt_qc3018ax
+  DEVICE_VENDOR := QCZT
+  DEVICE_MODEL := QC3018AX
+  DEVICE_DTS := mt7981-qczt-qc3018ax
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := qczt,qc3018ax
+  DEVICE_PACKAGES := $(MT7981_USB_PKGS) f2fsck losetup mkf2fs kmod-fs-f2fs kmod-mmc mmc-utils \
+	luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += qczt_qc3018ax
