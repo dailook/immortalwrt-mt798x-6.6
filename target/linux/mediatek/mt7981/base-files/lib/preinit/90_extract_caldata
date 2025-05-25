@@ -17,6 +17,7 @@ caldata_validate() {
 do_extract_caldata() {
 	case $(board_name) in
 	cmcc,xr30-emmc |\
+        qczt,qc3018ax |\
         sl,3000-emmc |\
 	cmcc,rax3000m-emmc|\
 	huasifei,wh3000-emmc)
