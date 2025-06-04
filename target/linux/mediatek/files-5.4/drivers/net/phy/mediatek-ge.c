@@ -1148,7 +1148,7 @@ static int mt798x_phy_calibration(struct phy_device *phydev)
 
 	if (!buf[0] || !buf[1] || !buf[2] || !buf[3] || len < 4 * sizeof(u32)) {
 		phydev_err(phydev, "invalid efuse data\n");
-		ret = -EINVAL;
+		ret = 0;
 		goto out;
 	}
 
