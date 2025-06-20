@@ -62,6 +62,7 @@ mediatek_setup_interfaces()
 	*nokia,ea0326gmp*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" wan
 		;;
+	*r35-mini* |\
 	*mt3000* |\
 	glinet,x3000-emmc |\
 	*xe3000* |\
