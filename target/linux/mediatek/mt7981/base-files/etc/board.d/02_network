@@ -29,9 +29,9 @@ mediatek_setup_interfaces()
 	*360,t7*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 eth1" wan
 		;;
-        *kst,wf3000a* |\
-        *sl,3000* |\
-        *sl,3000-emmc* |\
+	*kst,wf3000a* |\
+	*sl,3000* |\
+	*sl,3000-emmc* |\
 	*cetron,ct3003*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 eth1" wan
 		;;
