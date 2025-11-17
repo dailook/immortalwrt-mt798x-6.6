@@ -213,7 +213,7 @@ platform_do_upgrade() {
 	cmcc,rax3000m |\
 	h3c,nx30pro |\
 	hnxt,c101 |\
-        *kjd,kj30-n* |\
+	*kjd,kj30-n* |\
 	*konka,komi-a31* |\
 	*nokia,ea0326gmp* |\
 	*snand*)
@@ -223,9 +223,9 @@ platform_do_upgrade() {
 	huasifei,wh3000-emmc |\
 	cmcc,rax3000m-emmc |\
 	cmcc,xr30-emmc |\
-        qczt,qc3018ax |\
+	qczt,qc3018ax |\
 	*sl,3000* |\
-        *sl,3000-emmc* |\
+	*sl,3000-emmc* |\
 	*emmc*)
 		CI_KERNPART="kernel"
 		CI_ROOTPART="rootfs"
@@ -265,20 +265,20 @@ platform_check_image() {
 	*clt,r30b1* |\
 	*imou,lc-hx3001* |\
 	*e-life,etr631-t* |\
-        *e-life,etr635-u* |\
-        cmcc,rax3000me |\
-        cmcc,xr30 |\
-        *kst,wf3000a* |\
-        *newland,nl-wr8103* |\
-        *newland,nl-wr9103* |\
+	*e-life,etr635-u* |\
+	cmcc,rax3000me |\
+	cmcc,xr30 |\
+	*kst,wf3000a* |\
+	*newland,nl-wr8103* |\
+	*newland,nl-wr9103* |\
 	*sl,3000* |\
-        *sl,3000-emmc* |\
+	*sl,3000-emmc* |\
 	*jcg,q30* |\
 	cmcc,a10 |\
 	cmcc,rax3000m* |\
 	h3c,nx30pro |\
 	hnxt,c101 |\
-        *kjd,kj30-n* |\
+	*kjd,kj30-n* |\
 	*konka,komi-a31* |\
 	nradio,wt9103 |\
 	*nokia,ea0326gmp* |\
