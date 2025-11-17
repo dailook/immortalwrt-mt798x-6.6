@@ -38,6 +38,7 @@ cetron,ct3003-ubootmod|\
 cmcc,a10-ubootmod|\
 cudy,tr3000-v1-ubootmod|\
 h3c,magic-nx30-pro|\
+hnxt,c101|\
 imou,lc-hx3001|\
 jcg,q30-pro|\
 livinet,zr-3020-ubootmod|\
@@ -122,6 +123,7 @@ tplink,re6000xd)
 	local envdev=/dev/mtd$(find_mtd_index "u-boot-env")
 	ubootenv_add_uci_config "$envdev" "0x0" "0x20000" "0x20000" "1"
 	;;
+kjd,kj30-n|\
 netcore,n60-pro-512rom|\
 netcore,n60-pro)
 	ubootenv_add_uci_config "/dev/u-boot-env" "0x0" "0x80000" "0x80000" "1"
