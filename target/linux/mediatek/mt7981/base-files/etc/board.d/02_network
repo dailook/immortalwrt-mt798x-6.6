@@ -50,6 +50,7 @@ mediatek_setup_interfaces()
 	*newland,nl-wr8103*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" eth1
                 ;;
+        zn,m5 |\
 	*cmcc,a10*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" wan
 		;;
@@ -433,6 +434,7 @@ mediatek_setup_macs()
 		sed -i '/MacAddress=$wifi_mac/d' /etc/wireless/mediatek/mt7981.dbdc.b1.dat
 		echo "MacAddress=$wifi_mac" >> /etc/wireless/mediatek/mt7981.dbdc.b1.dat
 		;;
+	zn,m5 |\
 	*cmcc,a10* |\
 	*e-life,etr631-t* |\
 	*e-life,etr635-u* |\
