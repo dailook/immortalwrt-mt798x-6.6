@@ -1,0 +1,28 @@
+{
+	"luci-app-fancontrol": {
+		"description": "Fan Control",
+		"read": {
+			"uci": [
+				"fancontrol"
+			],
+			"file": {
+				"/sys/class/thermal/*/*": [
+					"read"
+				],
+				"/sys/class/hwmon/*/pwm*": [
+					"read"
+				]
+			}
+		},
+		"write": {
+			"uci": [
+				"fancontrol"
+			],
+			"file": {
+				"/sys/class/hwmon/*/pwm*": [
+					"write"
+				]
+			}
+		}
+	}
+}

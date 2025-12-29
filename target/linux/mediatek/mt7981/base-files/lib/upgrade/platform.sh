@@ -199,6 +199,7 @@ platform_do_upgrade() {
 	*abt,asr3000* |\
 	*cetron,ct3003* |\
 	*clt,r30b1* |\
+	comfast,cf-wr632ax |\
 	*imou,lc-hx3001* |\
 	*e-life,etr631-t* |\
 	*e-life,etr635-u* |\
@@ -221,6 +222,7 @@ platform_do_upgrade() {
 		nand_do_upgrade "$1"
 		;;
 	Airpi |\
+	aigo,ags21 |\
 	huasifei,wh3000-emmc |\
 	cmcc,rax3000m-emmc |\
 	cmcc,xr30-emmc |\
@@ -251,6 +253,7 @@ platform_check_image() {
 	[ "$#" -gt 1 ] && return 1
 
 	case "$board" in
+	aigo,ags21 |\
 	cudy* |\
 	*mt3000* |\
 	glinet,x3000-emmc |\
@@ -264,6 +267,7 @@ platform_check_image() {
 	*abt,asr3000* |\
 	*cetron,ct3003* |\
 	*clt,r30b1* |\
+	comfast,cf-wr632ax |\
 	*imou,lc-hx3001* |\
 	*e-life,etr631-t* |\
 	*e-life,etr635-u* |\

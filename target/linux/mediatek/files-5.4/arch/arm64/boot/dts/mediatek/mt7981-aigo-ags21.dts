@@ -1,0 +1,180 @@
+/dts-v1/;
+#include "mt7981.dtsi"
+
+/ {
+	model = "Aigo AGS21";
+	compatible = "aigo,ags21", "mediatek,mt7981";
+
+	chosen {
+		bootargs = "console=ttyS0,115200n1 loglevel=8 \
+			    earlycon=uart8250,mmio32,0x11002000 \
+			    root=PARTLABEL=rootfs rootwait rootfstype=squashfs,f2fs";
+	};
+
+	aliases {
+		led-boot = &status_red_led;
+		led-failsafe = &status_red_led;
+		led-running = &status_blue_led;
+		led-upgrade = &status_blue_led;
+		serial0 = &uart0;
+	};
+
+	memory {
+		reg = <0 0x40000000 0 0x20000000>;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		status_red_led: led-0 {
+			label = "red:status";
+			gpios = <&pio 6 GPIO_ACTIVE_LOW>;
+		};
+
+		status_blue_led: led-1 {
+			label = "blue:status";
+			gpios = <&pio 4 GPIO_ACTIVE_LOW>;
+		};
+
+		internet_led: led-2 {
+			label = "green:status";
+			gpios = <&pio 29 GPIO_ACTIVE_LOW>;
+		};
+
+		wifi_led: led-3 {
+			label = "white:status";
+			gpios = <&pio 30 GPIO_ACTIVE_LOW>;
+		};
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+		reset {
+			label = "reset";
+			linux,code = <KEY_RESTART>;
+			gpios = <&pio 1 GPIO_ACTIVE_LOW>;
+		};
+
+		mesh {
+			label = "mesh";
+			linux,code = <BTN_9>;
+			gpios = <&pio 0 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&watchdog {
+	status = "okay";
+};
+
+&eth {
+	status = "okay";
+
+	gmac0: mac@0 {
+		compatible = "mediatek,eth-mac";
+		reg = <0>;
+		phy-mode = "2500base-x";
+
+		fixed-link {
+			speed = <2500>;
+			full-duplex;
+			pause;
+		};
+	};
+	
+	gmac1: mac@1 {
+		compatible = "mediatek,eth-mac";
+		reg = <1>;
+		phy-mode = "gmii";
+		phy-handle = <&phy0>;
+	};
+
+	mdio: mdio-bus {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		phy0: ethernet-phy@0 {
+			compatible = "ethernet-phy-id03a2.9461";
+			reg = <0>;
+			phy-mode = "gmii";
+			nvmem-cells = <&phy_calibration>;
+			nvmem-cell-names = "phy-cal-data";
+		};
+
+		switch@0 {
+			compatible = "mediatek,mt7531";
+			reg = <31>;
+			reset-gpios = <&pio 39 0>;
+
+			ports {
+				#address-cells = <1>;
+				#size-cells = <0>;
+
+				port@1 {
+					reg = <1>;
+					label = "lan1";
+				};
+
+				port@2 {
+					reg = <2>;
+					label = "lan2";
+				};
+				
+				port@6 {
+					reg = <6>;
+					label = "cpu";
+					ethernet = <&gmac0>;
+					phy-mode = "2500base-x";
+
+					fixed-link {
+						speed = <2500>;
+						full-duplex;
+						pause;
+					};
+				};
+			};
+		};
+	};
+};
+
+&hnat {
+	mtketh-wan = "eth1";
+	mtketh-lan = "lan";
+	mtketh-max-gmac = <2>;
+	status = "okay";
+};
+
+&mmc0 {
+	bus-width = <8>;
+	cap-mmc-highspeed;
+	max-frequency = <52000000>;
+	no-sd;
+	no-sdio;
+	non-removable;
+	pinctrl-names = "default", "state_uhs";
+	pinctrl-0 = <&mmc0_pins_default>;
+	pinctrl-1 = <&mmc0_pins_uhs>;
+	vmmc-supply = <&reg_3p3v>;
+	non-removable;
+	status = "okay";
+};
+
+&pio {
+	mmc0_pins_default: mmc0-pins-default {
+		mux {
+			function = "flash";
+			groups = "emmc_45";
+		};
+	};
+
+	mmc0_pins_uhs: mmc0-pins-uhs {
+		mux {
+			function = "flash";
+			groups = "emmc_45";
+		};
+	};
+};

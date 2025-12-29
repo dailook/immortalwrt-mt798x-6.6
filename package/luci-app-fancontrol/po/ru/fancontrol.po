@@ -1,0 +1,41 @@
+msgid "Fan Control"
+msgstr "Управление вентилятором"
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Enable"
+msgstr "Включить"
+
+msgid "Thermal File"
+msgstr "Файл температуры"
+
+msgid "Fan File"
+msgstr "Файл управления вентилятором"
+
+msgid "Fan Speed File"
+msgstr "Файл скорости вентилятора"
+
+msgid "Initial Speed"
+msgstr "Начальная скорость"
+
+msgid "Please enter the initial speed for fan startup."
+msgstr "Введите начальную скорость при запуске вентилятора."
+
+msgid "Max Speed"
+msgstr "Максимальная скорость"
+
+msgid "Please enter maximum fan speed."
+msgstr "Введите максимальную скорость вентилятора."
+
+msgid "Start Temperature"
+msgstr "Температура запуска"
+
+msgid "Please enter the fan start temperature."
+msgstr "Введите температуру запуска вентилятора."
+
+msgid "Current speed:"
+msgstr "Текущая скорость:"
+
+msgid "Current temperature:"
+msgstr "Текущая температура:"

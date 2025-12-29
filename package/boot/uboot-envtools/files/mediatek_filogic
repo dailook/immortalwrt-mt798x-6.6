@@ -61,6 +61,7 @@ zyxel,ex5601-t0-ubootmod)
 acer,predator-w6|\
 acer,predator-w6d|\
 acer,vero-w6m|\
+aigo,ags21|\
 glinet,gl-mt2500|\
 glinet,gl-mt6000|\
 glinet,gl-x3000|\
@@ -105,6 +106,7 @@ zbtlink,zbt-z8102ax|\
 zbtlink,zbt-z8103ax)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x20000"
 	;;
+comfast,cf-wr632ax|\
 comfast,cf-e393ax)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x80000"
 	;;

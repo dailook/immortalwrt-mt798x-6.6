@@ -15,6 +15,10 @@ case "$board" in
 	ucidef_set_led_netdev "wlan2g" "WLAN2G" "airpi:2g" "ra0" "link"
         ucidef_set_led_netdev "wlan5g" "WLAN5G" "airpi:2g" "rax0" "link"
 	;;
+aigo,ags21)
+	ucidef_set_led_netdev "internet" "INTERNET" "green:status" "eth1"
+	ucidef_set_led_netdev "wlan" "WLAN" "white:status" "ra0"
+	;;
 abt,asr3000)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "wan"
 	ucidef_set_led_netdev "wlan2g" "WLAN2G" "green:wlan2g" "ra0"
@@ -24,6 +28,10 @@ clt,r30b1)
 	ucidef_set_led_default "all_ctrl" "ALL_CTRL" "ctrl_led_all" "1"
 	ucidef_set_led_default "internet" "INTERNET" "led_internet" "1"
 	ucidef_set_led_default "power_red" "POWER_RED" "led_power" "0"
+	;;
+comfast,cf-wr632ax)
+	ucidef_set_led_default "wan" "WAN" "comfast:blue" "1"
+	ucidef_add_led_link "wan" "eth0"
 	;;
 imou,lc-hx3001|\
 nokia,ea0326gmp)
