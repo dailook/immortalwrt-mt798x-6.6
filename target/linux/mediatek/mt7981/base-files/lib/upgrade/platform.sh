@@ -217,6 +217,7 @@ platform_do_upgrade() {
 	*kjd,kj30-n* |\
 	*konka,komi-a31* |\
 	*nokia,ea0326gmp* |\
+	olb,hw3000 |\
 	zn,m5 |\
 	*snand*)
 		nand_do_upgrade "$1"
@@ -288,6 +289,7 @@ platform_check_image() {
 	nradio,wt9103 |\
 	*nokia,ea0326gmp* |\
 	Airpi |\
+	olb,hw3000 |\
 	zn,m5 |\
 	*snand* |\
 	*emmc*)
