@@ -61,7 +61,7 @@ static int is_cah_ctrl_request_done(int ppe_id)
 	do {
 		if (((readl(hnat_priv->ppe_base[ppe_id] + PPE_CAH_CTRL) >> 8) & 0x1) == 0)
 			return 1;
-		usleep_range(1000, 1100);
+		udelay(1000);
 	} while (--count);
 	return 0;
 }
