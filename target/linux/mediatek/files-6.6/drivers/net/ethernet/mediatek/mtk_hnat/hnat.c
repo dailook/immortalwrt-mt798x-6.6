@@ -467,6 +467,7 @@ static int hnat_hw_init(u32 ppe_id)
 	if (hnat_priv->data->version == MTK_HNAT_V4) {
 		writel(0xcb777, hnat_priv->ppe_base[ppe_id] + PPE_DFT_CPORT1);
 		writel(0x7f, hnat_priv->ppe_base[ppe_id] + PPE_SBW_CTRL);
+		cr_set_field(hnat_priv->ppe_base[ppe_id] + PPE_GLO_CFG, SP_CMP_EN, 1);
 	}
 
 	/*enable ppe mib counter*/

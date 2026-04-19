@@ -205,6 +205,7 @@
 #define TTL0_DRP (0x1 << 4) /* RW */
 #define MCAST_TB_EN (0x1 << 7) /* RW */
 #define MCAST_HASH (0x3 << 12) /* RW */
+#define SP_CMP_EN (0x1 << 25) /* RW */
 
 #define MC_P3_PPSE (0xf << 12) /* RW */
 #define MC_P2_PPSE (0xf << 8) /* RW */
