@@ -251,7 +251,7 @@ mediatek_setup_macs()
 		lan_mac=$(macaddr_add $wan_mac 1)
 		label_mac=$lan_mac
 		;;
-        sl,3000-emmc)
+	sl,3000-emmc)
  		lan_mac=$(mmc_get_mac_binary factory 0x04)		
  		wan_mac=$(macaddr_add "$lan_mac" -2)
  		label_mac=$lan_mac

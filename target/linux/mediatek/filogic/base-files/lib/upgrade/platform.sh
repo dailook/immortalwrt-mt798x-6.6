@@ -79,10 +79,10 @@ platform_do_upgrade() {
 	ruijie,rg-x60-new|\
 	qihoo,360t7)
 		CI_UBIPART="ubi"
-    		CI_KERNPART="kernel"
-      		CI_ROOTPART="rootfs"
-    		nand_do_upgrade "$1"
-    		;;
+		CI_KERNPART="kernel"
+		CI_ROOTPART="rootfs"
+		nand_do_upgrade "$1"
+		;;
 	abt,asr3000|\
 	bananapi,bpi-r3|\
 	bananapi,bpi-r3-mini|\
