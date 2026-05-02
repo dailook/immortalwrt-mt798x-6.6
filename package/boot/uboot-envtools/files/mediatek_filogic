@@ -45,6 +45,7 @@ mercusys,mr90x-v1-ubi|\
 netcore,n60|\
 netcore,n60-pro|\
 netis,nx31|\
+netis,nx32u|\
 nokia,ea0326gmp|\
 qihoo,360t7|\
 routerich,ax3000-ubootmod|\
@@ -85,9 +86,12 @@ bananapi,bpi-r3-mini|\
 bananapi,bpi-r4|\
 bananapi,bpi-r4-poe|\
 cmcc,rax3000m|\
+bt,r320|\
+bt,rb300|\
 cmcc,rax3000me|\
 jdcloud,re-cp-03|\
-konka,komi-a31)
+konka,komi-a31|\
+sn,r1)
 	. /lib/upgrade/fit.sh
 	export_fitblk_bootdev
 	case "$CI_METHOD" in

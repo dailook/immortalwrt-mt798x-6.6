@@ -16,6 +16,12 @@ caldata_validate() {
 
 do_extract_caldata() {
 	case $(board_name) in
+	cmcc,xr30-emmc |\
+	cmcc,rax3000m-emmc-mtk)
+		FIRMWARE=MT7981_iPAiLNA_EEPROM.bin
+		caldata_validate && exit 0
+		caldata_extract_mmc "factory" 0x0 0x1000
+		;;
 	glinet,gl-mt6000|\
 	jdcloud,re-cp-03)
 		FIRMWARE=MT7986_ePAeLNA_EEPROM_AX6000.bin

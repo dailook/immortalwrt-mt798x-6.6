@@ -116,6 +116,7 @@ platform_do_upgrade() {
 	acer,vero-w6m|\
 	arcadyan,mozart|\
 	bt,r320|\
+	bt,rb300|\
 	clx,s20l|\
 	clx,s20p|\
 	glinet,gl-mt2500|\
@@ -127,6 +128,7 @@ platform_do_upgrade() {
 	cmcc,rax3000m-emmc|\
 	qczt,qc3018ax|\
 	sl,3000-emmc|\
+	sn,r1|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\
@@ -237,6 +239,7 @@ platform_copy_config() {
 	acer,vero-w6m|\
 	arcadyan,mozart|\
 	bt,r320|\
+	bt,rb300|\
 	clx,s20l|\
 	clx,s20p|\
 	glinet,gl-mt2500|\
@@ -247,6 +250,7 @@ platform_copy_config() {
 	cmcc,rax3000m-emmc|\
 	jdcloud,re-cp-03|\
 	sl,3000-emmc|\
+	sn,r1|\
 	smartrg,sdg-8612|\
 	smartrg,sdg-8614|\
 	smartrg,sdg-8622|\

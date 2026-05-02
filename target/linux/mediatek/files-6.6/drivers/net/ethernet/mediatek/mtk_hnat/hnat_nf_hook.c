@@ -1959,6 +1959,7 @@ static unsigned int skb_to_hnat_info(struct sk_buff *skb,
  
 	bind_state = entry.bfib1.state;
 	entry.bfib1.state = UNBIND;
+	spin_lock(&hnat_priv->entry_lock);
 	wmb();
 	memcpy(foe, &entry, sizeof(entry));
 	dma_wmb();
@@ -1966,6 +1967,7 @@ static unsigned int skb_to_hnat_info(struct sk_buff *skb,
 	wmb();
 	memcpy(foe, &entry, sizeof(entry));
 	dma_wmb();
+	spin_unlock(&hnat_priv->entry_lock);
 	/*reset statistic for this entry*/
 	if (hnat_priv->data->per_flow_accounting)
 		memset(&hnat_priv->acct[skb_hnat_ppe(skb)][skb_hnat_entry(skb)],
@@ -2010,17 +2012,13 @@ int mtk_sw_nat_hook_tx(struct sk_buff *skb, int gmac_no)
 		return NF_ACCEPT;
 
 	entry = &hnat_priv->foe_table_cpu[skb_hnat_ppe(skb)][skb_hnat_entry(skb)];
-	spin_lock(&hnat_priv->entry_lock);
 	
 	if (entry_hnat_is_bound(entry))
-		{spin_unlock(&hnat_priv->entry_lock);
 		return NF_ACCEPT;
-		}
 
 	if (skb_hnat_reason(skb) != HIT_UNBIND_RATE_REACH)
-		{spin_unlock(&hnat_priv->entry_lock);
 		return NF_ACCEPT;
-		}
+
 
 	eth = eth_hdr(skb);
 	memcpy(&bfib1_tx, &entry->bfib1, sizeof(entry->bfib1));
@@ -2028,9 +2026,7 @@ int mtk_sw_nat_hook_tx(struct sk_buff *skb, int gmac_no)
 	/*not bind multicast if PPE mcast not enable*/
 	if (!hnat_priv->data->mcast) {
 		if (is_multicast_ether_addr(eth->h_dest))
-			{spin_unlock(&hnat_priv->entry_lock);
-			return NF_ACCEPT;
-			}	
+			return NF_ACCEPT;	
 
 		if (IS_IPV4_GRP(entry))
 			entry->ipv4_hnapt.iblk2.mcast = 0;
@@ -2159,6 +2155,7 @@ int mtk_sw_nat_hook_tx(struct sk_buff *skb, int gmac_no)
 	bfib1_tx.state = BIND;
 	bind_state = bfib1_tx.state;
 	bfib1_tx.state = UNBIND;
+	spin_lock(&hnat_priv->entry_lock);
 	wmb();
 	memcpy(&entry->bfib1, &bfib1_tx, sizeof(bfib1_tx));
 	dma_wmb();
@@ -2378,10 +2375,7 @@ static unsigned int mtk_hnat_nf_post_routing(
 			memcpy(hw_path.eth_src, eth_hdr(skb)->h_source, ETH_ALEN);
 		} else if (fn(skb, arp_dev, &hw_path)) {
 			break;}
-
-		spin_lock(&hnat_priv->entry_lock);
 		skb_to_hnat_info(skb, out, entry, &hw_path, force_bound);
-		spin_unlock(&hnat_priv->entry_lock);
 		break;
 	case HIT_BIND_KEEPALIVE_DUP_OLD_HDR:
 		if (fn && !mtk_hnat_accel_type(skb))

@@ -14,6 +14,7 @@ case "$FIRMWARE" in
 			/lib/firmware/$FIRMWARE
 		;;
 	sl,3000-emmc|\
+	sn,r1|\
 	umi,uax3000e|\
 	ubnt,unifi-6-plus)
 		caldata_extract_mmc "factory" 0x0 0x1000
