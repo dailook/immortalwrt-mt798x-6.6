@@ -749,6 +749,9 @@ setup_model()
 	aigo,ags21|\
 	*mt3000* |\
 	glinet,x3000-emmc |\
+	*gielink,g33pro* |\
+	*gielink,g33pro-v2* |\
+	gielink,g33pro-v3
 	*xe3000* |\
 	comfast,cf-wr632ax |\
 	*cudy* |\

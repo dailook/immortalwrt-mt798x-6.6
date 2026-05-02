@@ -37,6 +37,7 @@ abt,asr3000|\
 cetron,ct3003-ubootmod|\
 cmcc,a10-ubootmod|\
 cudy,tr3000-v1-ubootmod|\
+gielink,g33pro-v3|\
 h3c,magic-nx30-pro|\
 hnxt,c101|\
 imou,lc-hx3001|\
@@ -99,6 +100,8 @@ konka,komi-a31)
 	;;
 cetron,ct3003|\
 edgecore,eap111|\
+*gielink,g33pro*|\
+*gielink,g33pro-v2*|\
 h3c,magic-nx30-pro-nmbm|\
 livinet,zr-3020|\
 netgear,wax220|\
