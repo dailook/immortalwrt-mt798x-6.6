@@ -748,6 +748,8 @@ setup_model()
 		MT7986_whnat $num_of_wifi $usbnet
 		;;
 	aigo,ags21|\
+	bt,r320|\
+	bt,rb300|\
 	*mt3000* |\
 	*wirelesstag* |\
 	glinet,x3000-emmc |\
@@ -766,6 +768,7 @@ setup_model()
 	cmcc,rax3000me |\
 	qczt,qc3018ax |\
 	sl,3000-emmc|\
+	sn,r1|\
 	h3c,nx30pro |\
 	konka,komi-a31 |\
 	*nokia,ea0326gmp* |\
