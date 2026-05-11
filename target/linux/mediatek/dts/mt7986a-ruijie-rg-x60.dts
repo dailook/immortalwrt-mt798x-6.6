@@ -8,7 +8,7 @@
 #include "mt7986a.dtsi"
 
 / {
-	model = "Ruijie RG-X60-NEW";
+	model = "Ruijie RG-X60";
 	compatible = "ruijie,rg-x60", "mediatek,mt7986a";
 
 	aliases {
