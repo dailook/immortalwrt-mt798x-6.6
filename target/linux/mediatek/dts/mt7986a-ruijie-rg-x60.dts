@@ -9,7 +9,7 @@
 
 / {
 	model = "Ruijie RG-X60-NEW";
-	compatible = "ruijie,rg-x60-new", "mediatek,mt7986a";
+	compatible = "ruijie,rg-x60", "mediatek,mt7986a";
 
 	aliases {
 		serial0 = &uart0;
