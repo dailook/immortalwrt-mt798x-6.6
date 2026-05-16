@@ -204,7 +204,7 @@ platform_do_upgrade() {
 	*e-life,etr631-t* |\
 	*e-life,etr635-u* |\
 	*gielink,g33pro* |\
-	*gielink,g33pro-v2* 
+	*gielink,g33pro-v2* |\
 	gielink,g33pro-v3 |\
 	cmcc,rax3000me |\
 	cmcc,xr30 |\
