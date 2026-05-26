@@ -605,19 +605,19 @@ get_wifi_if_name()
 		wifi_if1s=`l1dat zone2if dev1`
 		wifi_if2s=`l1dat zone2if dev2`
 		wifi_if3s=`l1dat zone2if dev3`
-
+	
 		wifi1=`echo $wifi_if1s | awk '{print $1}'`
 		wifi1_prefix=`echo $wifi_if1s | awk '{print $2}'`
 		wifi1_apcli=`echo $wifi_if1s | awk '{print $3}'`
 		wifi1_wds=`echo $wifi_if1s | awk '{print $4}'`
 		wifi1_mesh=`echo $wifi_if1s | awk '{print $5}'`
-
+	
 		wifi2=`echo $wifi_if2s | awk '{print $1}'`
 		wifi2_prefix=`echo $wifi_if2s | awk '{print $2}'`
 		wifi2_apcli=`echo $wifi_if2s | awk '{print $3}'`
 		wifi2_wds=`echo $wifi_if2s | awk '{print $4}'`
 		wifi2_mesh=`echo $wifi_if2s | awk '{print $5}'`
-
+	
 		wifi3=`echo $wifi_if3s | awk '{print $1}'`
 		wifi3_prefix=`echo $wifi_if3s | awk '{print $2}'`
 		wifi3_apcli=`echo $wifi_if3s | awk '{print $3}'`
@@ -736,25 +736,20 @@ setup_model()
 	case $board in
 	xiaomi,redmi-router-ax6000* |\
 	bananapi,bpi-r3-mini* |\
-	clx,s20l|\
-	clx,s20p |\
 	netcore,n60* |\
 	glinet,gl-mt6000|\
+	ruijie,ew-6000gx-pro* |\
+	ruijie,rg-x60* |\
 	jdcloud,re-cp-03 |\
-	ruijie,rg-x60|\
 	tplink,tl-xdr608* |\
 	zyxel,ex5700 |\
 	*7986*)
 		MT7986_whnat $num_of_wifi $usbnet
 		;;
-	aigo,ags21|\
-	bt,r320|\
-	bt,rb300|\
 	*mt3000* |\
 	*wirelesstag* |\
 	glinet,x3000-emmc |\
 	*xe3000* |\
-	comfast,cf-wr632ax |\
 	*cudy* |\
 	*mt2500* |\
 	*zr-3020* |\
@@ -765,10 +760,7 @@ setup_model()
 	xiaomi,mi-router-wr30u* |\
 	xiaomi,mi-router-ax3000t* |\
 	*rax3000m* |\
-	cmcc,rax3000me |\
-	qczt,qc3018ax |\
 	sl,3000-emmc|\
-	sn,r1|\
 	h3c,nx30pro |\
 	konka,komi-a31 |\
 	*nokia,ea0326gmp* |\

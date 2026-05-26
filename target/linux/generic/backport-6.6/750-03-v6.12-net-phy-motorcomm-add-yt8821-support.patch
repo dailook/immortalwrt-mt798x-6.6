@@ -1,6 +1,26 @@
+From b671105b88c3bb9acc1fb61a3ee2ca0ece60cb8d Mon Sep 17 00:00:00 2001
+From: Frank Sae <Frank.Sae@motor-comm.com>
+Date: Sun, 1 Sep 2024 01:35:26 -0700
+Subject: [PATCH] net: phy: Add driver for Motorcomm yt8821 2.5G ethernet phy
+
+Add a driver for the motorcomm yt8821 2.5G ethernet phy. Verified the
+driver on BPI-R3(with MediaTek MT7986(Filogic 830) SoC) development board,
+which is developed by Guangdong Bipai Technology Co., Ltd..
+
+yt8821 2.5G ethernet phy works in AUTO_BX2500_SGMII or FORCE_BX2500
+interface, supports 2.5G/1000M/100M/10M speeds, and wol(magic package).
+
+Signed-off-by: Frank Sae <Frank.Sae@motor-comm.com>
+Reviewed-by: Sai Krishna <saikrishnag@marvell.com>
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
+Signed-off-by: Paolo Abeni <pabeni@redhat.com>
+---
+ drivers/net/phy/motorcomm.c | 671 +++++++++++++++++++++++++++++++++++-
+ 1 file changed, 667 insertions(+), 4 deletions(-)
+
 --- a/drivers/net/phy/motorcomm.c
 +++ b/drivers/net/phy/motorcomm.c
-@@ -1,11 +1,12 @@
+@@ -1,6 +1,6 @@
  // SPDX-License-Identifier: GPL-2.0+
  /*
 - * Motorcomm 8511/8521/8531/8531S PHY driver.
@@ -8,13 +28,7 @@
   *
   * Author: Peter Geis <pgwipeout@gmail.com>
   * Author: Frank <Frank.Sae@motor-comm.com>
-  */
- 
-+#include <linux/bitfield.h>
- #include <linux/etherdevice.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
-@@ -16,8 +17,8 @@
+@@ -16,8 +16,8 @@
  #define PHY_ID_YT8521		0x0000011a
  #define PHY_ID_YT8531		0x4f51e91b
  #define PHY_ID_YT8531S		0x4f51e91a
@@ -25,26 +39,16 @@
   *	UTP Register space	|	FIBER Register space
   *  ------------------------------------------------------------
   * |	UTP MII			|	FIBER MII		|
-@@ -46,12 +47,12 @@
- 
- /* Specific Status Register */
- #define YTPHY_SPECIFIC_STATUS_REG		0x11
--#define YTPHY_SSR_SPEED_MODE_OFFSET		14
--
--#define YTPHY_SSR_SPEED_MODE_MASK		(BIT(15) | BIT(14))
--#define YTPHY_SSR_SPEED_10M			0x0
--#define YTPHY_SSR_SPEED_100M			0x1
--#define YTPHY_SSR_SPEED_1000M			0x2
-+#define YTPHY_SSR_SPEED_MASK			((0x3 << 14) | BIT(9))
-+#define YTPHY_SSR_SPEED_10M			((0x0 << 14))
-+#define YTPHY_SSR_SPEED_100M			((0x1 << 14))
-+#define YTPHY_SSR_SPEED_1000M			((0x2 << 14))
+@@ -50,6 +50,8 @@
+ #define YTPHY_SSR_SPEED_10M			((0x0 << 14))
+ #define YTPHY_SSR_SPEED_100M			((0x1 << 14))
+ #define YTPHY_SSR_SPEED_1000M			((0x2 << 14))
 +#define YTPHY_SSR_SPEED_10G			((0x3 << 14))
 +#define YTPHY_SSR_SPEED_2500M			((0x0 << 14) | BIT(9))
  #define YTPHY_SSR_DUPLEX_OFFSET			13
  #define YTPHY_SSR_DUPLEX			BIT(13)
  #define YTPHY_SSR_PAGE_RECEIVED			BIT(12)
-@@ -284,12 +285,89 @@
+@@ -268,12 +270,89 @@
  #define YT8531_SCR_CLK_SRC_REF_25M		4
  #define YT8531_SCR_CLK_SRC_SSC_25M		5
  
@@ -134,17 +138,7 @@
  struct yt8521_priv {
  	/* combo_advertising is used for case of YT8521 in combo mode,
  	 * this means that yt8521 may work in utp or fiber mode which depends
-@@ -1201,8 +1279,7 @@
- 	else
- 		duplex = DUPLEX_FULL;	/* for fiber, it always DUPLEX_FULL */
- 
--	speed_mode = (status & YTPHY_SSR_SPEED_MODE_MASK) >>
--		     YTPHY_SSR_SPEED_MODE_OFFSET;
-+	speed_mode = status & YTPHY_SSR_SPEED_MASK;
- 
- 	switch (speed_mode) {
- 	case YTPHY_SSR_SPEED_10M:
-@@ -2366,6 +2443,575 @@
+@@ -2249,6 +2328,572 @@ static int yt8521_get_features(struct ph
  	return ret;
  }
  
@@ -158,13 +152,10 @@
 +{
 +	int ret;
 +
-+	/* 在Linux 6.6内核中，genphy_c45_pma_read_ext_abilities函数已被移除或重命名 */
-+	/* 使用genphy_c45_pma_read_abilities替代 */
-+	ret = genphy_c45_pma_read_abilities(phydev);
++	ret = genphy_c45_pma_read_ext_abilities(phydev);
 +	if (ret < 0)
 +		return ret;
 +
-+	/* 同时调用genphy_read_abilities来获取其他能力 */
 +	return genphy_read_abilities(phydev);
 +}
 +
@@ -720,7 +711,7 @@
  static struct phy_driver motorcomm_phy_drvs[] = {
  	{
  		PHY_ID_MATCH_EXACT(PHY_ID_YT8511),
-@@ -2427,11 +3073,28 @@
+@@ -2304,11 +2949,28 @@ static struct phy_driver motorcomm_phy_d
  		.suspend	= yt8521_suspend,
  		.resume		= yt8521_resume,
  	},
@@ -750,7 +741,7 @@
  MODULE_AUTHOR("Peter Geis");
  MODULE_AUTHOR("Frank");
  MODULE_LICENSE("GPL");
-@@ -2441,6 +3104,7 @@
+@@ -2318,6 +2980,7 @@ static const struct mdio_device_id __may
  	{ PHY_ID_MATCH_EXACT(PHY_ID_YT8521) },
  	{ PHY_ID_MATCH_EXACT(PHY_ID_YT8531) },
  	{ PHY_ID_MATCH_EXACT(PHY_ID_YT8531S) },
