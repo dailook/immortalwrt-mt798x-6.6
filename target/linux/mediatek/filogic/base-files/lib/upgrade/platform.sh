@@ -77,6 +77,8 @@ platform_do_upgrade() {
 	h3c,magic-nx30-pro|\
 	jcg,q30-pro|\
 	ruijie,rg-x60|\
+	ruijie,rg-x60-pro|\
+	ruijie,ew-6000gx-pro|\
 	qihoo,360t7)
 		CI_UBIPART="ubi"
 		CI_KERNPART="kernel"

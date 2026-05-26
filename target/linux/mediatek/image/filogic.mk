@@ -1860,6 +1860,17 @@ define Device/yvr_x6
 endef
 TARGET_DEVICES += yvr_x6
 
+define Device/ruijie_ew-6000gx-pro
+  DEVICE_VENDOR := Ruijie
+  DEVICE_MODEL := EW-6000GX Pro
+  DEVICE_DTS := mt7986a-ruijie-ew-6000gx-pro
+  DEVICE_DTS_CONFIG := config@ruijie_x60_gsw_en8811h_phy
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-phy-airoha-en8811h airoha-en8811h-firmware
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += ruijie_ew-6000gx-pro
+
 define Device/ruijie_rg-x60
   DEVICE_VENDOR := Ruijie
   DEVICE_MODEL := RG-X60

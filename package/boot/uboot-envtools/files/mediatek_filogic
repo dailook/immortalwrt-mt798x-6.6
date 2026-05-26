@@ -49,7 +49,6 @@ netis,nx32u|\
 nokia,ea0326gmp|\
 qihoo,360t7|\
 routerich,ax3000-ubootmod|\
-ruijie,rg-x60|\
 tplink,tl-xdr4288|\
 tplink,tl-xdr6086|\
 tplink,tl-xdr6088|\
@@ -151,6 +150,11 @@ openembed,som7981)
 	;;
 openwrt,one)
 	ubootenv_add_ubi_default
+	;;
+ruijie,ew-6000gx-pro|\
+ruijie,rg-x60|\
+ruijie,rg-x60-pro)
+	ubootenv_add_uci_config "/dev/mtd2" "0x0" "0x80000" "0x20000" "4"
 	;;
 smartrg,sdg-8733|\
 smartrg,sdg-8733a|\
