@@ -54,8 +54,8 @@ ImmortalWrt 是 [OpenWrt](https://openwrt.org ) 的一个分支，移植了更�
   - 更多细节请阅读 [编译系统设置](https://openwrt.org/docs/guide-developer/build-system/install-buildsystem ) 文档。
 
   ### 快速开始编译基于MT798X的路由器固件
-  1. 执行 `git clone -b openwrt-24.10-6.6 --single-branch --filter=blob:none https://github.com/dailook/immortalwrt-mt798x-6.6 immortalwrt-mt798x-6.6` 克隆源码。
-  2. 执行 `cd immortalwrt-mt798x-6.6` 进入源码目录。
+  1. 执行 `git clone -b 24.10.6 --single-branch --filter=blob:none https://github.com/dailook/immortalwrt-mt798x-6.6 immortalwrt-mt798x-24.10.6` 克隆源码。
+  2. 执行 `cd immortalwrt-mt798x-24.10.6` 进入源码目录。
   3. 执行 `./scripts/feeds update -a` 获取 feeds.conf / feeds.conf.default 中定义的全部最新软件包定义。
   4. 执行 `./scripts/feeds install -a` 将所有获取到的软件包链接到 package/feeds/ 中。
   5. 执行cp -f defconfig 目录下对应您设备的配置文件`.config`
