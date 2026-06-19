@@ -73,6 +73,12 @@ ImmortalWrt 是 [OpenWrt](https://openwrt.org ) 的一个分支，移植了更�
      # MT7986 mt7975高功率/netcore n60pro、ruijie rg-x60/x60-new
      cp -f defconfig/mt7975-ipailna-high-power.config .config
 
+     # mt7981无wifi
+     cp -f defconfig/mt7981-nowifi.config .config
+
+     # mt7986无wifi
+     cp -f defconfig/mt7986-nowifi.config .config
+
   6. 执行 `make menuconfig` 选择你所需要的机型和插件。
   7. 执行 `make download -j$(nproc)` 下载编译所需的DL库。
   8. 执行 `make V=s -j1` 编译固件。为免报错和硬件配置低而失败，首次编译建议用make V=s -j1命令。
