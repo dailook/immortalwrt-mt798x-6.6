@@ -76,7 +76,7 @@ ImmortalWrt 是 [OpenWrt](https://openwrt.org ) 的一个分支，移植了更�
      # mt7981无wifi
      cp -f defconfig/mt7981-nowifi.config .config
 
-     # mt7986无wifi
+     # mt7986无wifi 例如：clx_20m
      cp -f defconfig/mt7986-nowifi.config .config
 
   6. 执行 `make menuconfig` 选择你所需要的机型和插件。

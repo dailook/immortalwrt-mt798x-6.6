@@ -120,6 +120,7 @@ platform_do_upgrade() {
 	bt,r320|\
 	bt,rb300|\
 	clx,s20l|\
+	clx,s20m|\
 	clx,s20p|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
@@ -243,6 +244,7 @@ platform_copy_config() {
 	bt,r320|\
 	bt,rb300|\
 	clx,s20l|\
+	clx,s20m|\
 	clx,s20p|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\

@@ -565,10 +565,20 @@ define Device/clx_s20l
   DEVICE_MODEL := S20L
   DEVICE_DTS := mt7986a-clx-s20l
   DEVICE_DTS_DIR := ../dts
-  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount e2fsprogs f2fsck mkf2fs kmod-nvme kmod-mmc mmc-utils luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7986-firmware mt7986-wo-firmware kmod-usb3 automount e2fsprogs f2fsck mkf2fs kmod-nvme kmod-mmc mmc-utils luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils kmod-nvme nvme-cli
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += clx_s20l
+
+define Device/clx_s20m
+  DEVICE_VENDOR := CLX
+  DEVICE_MODEL := S20M
+  DEVICE_DTS := mt7986a-clx-s20m
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-usb3 automount e2fsprogs f2fsck mkf2fs kmod-nvme kmod-mmc mmc-utils luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils kmod-nvme nvme-cli
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += clx_s20m
 
 define Device/clx_s20p
   DEVICE_VENDOR := CLX
