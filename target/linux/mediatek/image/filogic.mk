@@ -203,6 +203,24 @@ define Device/aigo_ags21
 endef
 TARGET_DEVICES += aigo_ags21
 
+define Device/aigo_ags21-nand
+  DEVICE_VENDOR := Aigo
+  DEVICE_MODEL := AGS21 NAND
+  DEVICE_DTS := mt7981b-aigo-ags21-nand
+  DEVICE_DTS_DIR := ../dts
+  SUPPORTED_DEVICES := aigo,ags21-nand
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 116736k
+  KERNEL_IN_UBI := 1  
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += aigo_ags21-nand
+
 define Device/smartrg_sdg-8612
 $(call Device/adtran_smartrg)
   DEVICE_MODEL := SDG-8612
@@ -1336,6 +1354,17 @@ define Device/konka_komi-a31
   ARTIFACT/nor-bl31-uboot.fip := mt7981-bl31-uboot konka_komi-a31-nor
 endef
 TARGET_DEVICES += konka_komi-a31
+
+define Device/e-life_etr635-u-emmc
+  DEVICE_VENDOR := E-LIFE
+  DEVICE_MODEL := ETR635-U eMMC
+  DEVICE_DTS := mt7981b-e-life-etr635-u-emmc
+  DEVICE_DTS_DIR := ../dts
+  SUPPORTED_DEVICES := e-life,etr635-u-emmc
+  DEVICE_PACKAGES := 2fsck losetup mkf2fs kmod-fs-f2fs kmod-mmc luci-app-ksmbd luci-i18n-ksmbd-zh-cn ksmbd-utils
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += e-life_etr635-u-emmc
 
 define Device/livinet_zr-3020
   DEVICE_VENDOR := Livinet

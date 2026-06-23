@@ -12,6 +12,7 @@ mediatek_setup_interfaces()
 	cmcc,rax3000m*|\
 	cmcc,rax3000me|\
 	cmcc,xr30*|\
+	e-life,etr635-u-emmc|\
 	h3c,magic-nx30-pro|\
 	h3c,magic-nx30-pro-nmbm|\
 	imou,lc-hx3001|\
@@ -37,6 +38,7 @@ mediatek_setup_interfaces()
 	arcadyan,mozart)
 		ucidef_set_interfaces_lan_wan "lan0 eth1" eth2
 		;;
+	aigo,ags21-nand|\
 	aigo,ags21)
 		ucidef_set_interfaces_lan_wan "lan1 lan2" eth1
 		;;

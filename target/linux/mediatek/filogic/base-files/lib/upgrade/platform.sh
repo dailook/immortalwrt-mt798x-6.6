@@ -66,6 +66,7 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+	aigo,ags21-nand|\
 	comfast,cf-wr632ax|\
 	netcore,n60-pro|\
 	tplink,tl-xdr4288|\
@@ -122,6 +123,7 @@ platform_do_upgrade() {
 	clx,s20l|\
 	clx,s20m|\
 	clx,s20p|\
+	e-life,etr635-u-emmc|\
 	glinet,gl-mt2500|\
 	glinet,gl-mt6000|\
 	glinet,gl-x3000|\

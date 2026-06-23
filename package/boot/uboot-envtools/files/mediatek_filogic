@@ -67,6 +67,7 @@ cmcc,rax3000m-emmc|\
 clx,s20l|\
 clx,s20m|\
 clx,s20p|\
+e-life,etr635-u-emmc|\
 glinet,gl-mt2500|\
 glinet,gl-mt6000|\
 glinet,gl-x3000|\
@@ -107,6 +108,7 @@ sn,r1)
 		;;
 	esac
 	;;
+aigo,ags21-nand|\
 cetron,ct3003|\
 cmcc,rax3000m-nand|\
 edgecore,eap111|\
