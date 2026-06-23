@@ -605,19 +605,19 @@ get_wifi_if_name()
 		wifi_if1s=`l1dat zone2if dev1`
 		wifi_if2s=`l1dat zone2if dev2`
 		wifi_if3s=`l1dat zone2if dev3`
-	
+
 		wifi1=`echo $wifi_if1s | awk '{print $1}'`
 		wifi1_prefix=`echo $wifi_if1s | awk '{print $2}'`
 		wifi1_apcli=`echo $wifi_if1s | awk '{print $3}'`
 		wifi1_wds=`echo $wifi_if1s | awk '{print $4}'`
 		wifi1_mesh=`echo $wifi_if1s | awk '{print $5}'`
-	
+
 		wifi2=`echo $wifi_if2s | awk '{print $1}'`
 		wifi2_prefix=`echo $wifi_if2s | awk '{print $2}'`
 		wifi2_apcli=`echo $wifi_if2s | awk '{print $3}'`
 		wifi2_wds=`echo $wifi_if2s | awk '{print $4}'`
 		wifi2_mesh=`echo $wifi_if2s | awk '{print $5}'`
-	
+
 		wifi3=`echo $wifi_if3s | awk '{print $1}'`
 		wifi3_prefix=`echo $wifi_if3s | awk '{print $2}'`
 		wifi3_apcli=`echo $wifi_if3s | awk '{print $3}'`
@@ -748,6 +748,7 @@ setup_model()
 	*7986*)
 		MT7986_whnat $num_of_wifi $usbnet
 		;;
+	e-life,etr635-u-emmc|\
 	*mt3000* |\
 	*wirelesstag* |\
 	glinet,x3000-emmc |\
