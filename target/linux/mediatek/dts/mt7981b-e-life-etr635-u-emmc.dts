@@ -211,8 +211,6 @@
 							reg = <0x2a 0x6>;
 							#nvmem-cell-cells = <1>;
 						};
-
-
 					};
 				};
 			};
