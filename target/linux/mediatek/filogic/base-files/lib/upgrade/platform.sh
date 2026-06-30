@@ -77,6 +77,7 @@ platform_do_upgrade() {
 	xiaomi,mi-router-wr30u-ubootmod|\
 	h3c,magic-nx30-pro|\
 	jcg,q30-pro|\
+	kjd,kj30-n|\
 	ruijie,rg-x60|\
 	ruijie,rg-x60-pro|\
 	ruijie,ew-6000gx-pro|\

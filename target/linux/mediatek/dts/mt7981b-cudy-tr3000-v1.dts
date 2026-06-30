@@ -4,7 +4,7 @@
 #include "mt7981b-cudy-tr3000-v1.dtsi"
 
 / {
-	model = "Cudy TR3000 v1";
+	model = "Cudy TR3000 v1 512mb";
 	compatible = "cudy,tr3000-v1", "mediatek,mt7981";
 };
 
@@ -22,5 +22,5 @@
 };
 
 &ubi {
-	reg = <0x5c0000 0x4000000>;
+	reg = <0x5c0000 0x1ea00000>;
 };

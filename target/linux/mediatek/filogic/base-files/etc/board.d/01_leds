@@ -79,6 +79,9 @@ glinet,gl-xe3000)
 huasifei,wh3000-emmc)
 	ucidef_set_led_netdev "wan" "WAN" "red:wan" "eth1"
 	;;
+kjd,kj30-n)
+    ucidef_set_led_netdev "wan" "WAN" "blue:wan" "wan"
+	;;
 imou,lc-hx3001|\
 nokia,ea0326gmp)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1" "link"

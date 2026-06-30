@@ -8,7 +8,7 @@
 #include "mt7986a.dtsi"
 
 / {
-	model = "Netcore N60 Pro";
+	model = "Netcore N60 Pro 512mb";
 	compatible = "netcore,n60-pro", "mediatek,mt7986a";
 
 	aliases {
@@ -295,7 +295,7 @@
 
 			partition@580000 {
 				label = "ubi";
-				reg = <0x0580000 0x7280000>;
+				reg = <0x0580000 0x1ea00000>;
 			};
 		};
 	};

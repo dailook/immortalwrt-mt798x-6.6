@@ -123,6 +123,7 @@ comfast,cf-wr632ax|\
 comfast,cf-e393ax)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x80000"
 	;;
+kjd,kj30-n|\
 cudy,tr3000-v1|\
 cudy,tr3000-v1-256mb|\
 cudy,tr3000-v1-ubootmod)
