@@ -4,7 +4,7 @@
 #include "mt7981b-cmcc-rax3000m.dtsi"
 
 / {
-	model = "CMCC RAX3000M NAND 256rom version";
+	model = "CMCC RAX3000M NAND version";
 	compatible = "cmcc,rax3000m-nand", "mediatek,mt7981";
 
 	aliases {
@@ -99,7 +99,7 @@
 
 			partition@580000 {
 				label = "ubi";
-				reg = <0x580000 0xee00000>;
+				reg = <0x580000 0x7200000>;
 			};
 		};
 	};
