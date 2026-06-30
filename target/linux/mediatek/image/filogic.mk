@@ -1320,6 +1320,24 @@ define Device/keenetic_kn-3911
 endef
 TARGET_DEVICES += keenetic_kn-3911
 
+define Device/kjd_kj30-n
+  DEVICE_VENDOR := KJD
+  DEVICE_MODEL := KJ30-N
+  DEVICE_DTS := mt7981b-kjd-kj30-n
+  DEVICE_DTS_DIR := ../dts
+  SUPPORTED_DEVICES := kjd,kj30-n
+  DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 116736k
+  KERNEL_IN_UBI := 1  
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += kjd_kj30-n
+
 define Device/konka_komi-a31
   DEVICE_VENDOR := Konka
   DEVICE_MODEL := KOMI A31

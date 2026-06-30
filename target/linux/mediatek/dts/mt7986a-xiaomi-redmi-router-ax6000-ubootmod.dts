@@ -4,7 +4,7 @@
 #include "mt7986a-xiaomi-redmi-router-ax6000.dtsi"
 
 / {
-	model = "Xiaomi Redmi Router AX6000 (OpenWrt U-Boot layout)";
+	model = "Xiaomi Redmi Router AX6000";
 	compatible = "xiaomi,redmi-router-ax6000-ubootmod", "mediatek,mt7986a";
 };
 
